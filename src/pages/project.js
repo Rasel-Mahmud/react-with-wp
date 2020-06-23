@@ -50,9 +50,8 @@ class Project extends Component {
     const portfolioData = imageData.map((title, index)=>{
       const returnFilterClass = ()=>{
         if(data[index].filter[0] === filterData[index].id){
-          return filterData[index].slug
+          return filterData[index].slug;
         }
-        return '';
       }
 
       return <div key={title.id} className={`mix col-lg-6 col-md-6 ${returnFilterClass()}`}>
@@ -91,7 +90,11 @@ class Project extends Component {
       );
     }else {
       return(
-        <p>Loading....</p>
+        <div>
+          <div id="preloder">
+            <div className="loader"></div>
+          </div>
+        </div>
       );
     }
   }
