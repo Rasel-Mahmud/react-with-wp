@@ -16,11 +16,11 @@ class Project extends Component {
   }
   componentDidMount = () => {
     // getting project information
-    axios.get('http://wp-api.test/wp-json/wp/v2/show_project')
+    axios.get('https://awsweb.host/wp-json/wp/v2/show_project')
       .then(res=>{
         res.data.map((id, index)=>{
           const mediaID = `${res.data[index].featured_media}`;
-          axios.get(`http://wp-api.test/wp-json/wp/v2/media/${mediaID}`)
+          axios.get(`https://awsweb.host/wp-json/wp/v2/media/${mediaID}`)
             .then(media=>{
               this.setState({data: res.data, imageData: [...this.state.imageData, media.data], display: true })
             })
@@ -30,7 +30,7 @@ class Project extends Component {
       .catch(err => console.log(err))
 
     // getting filter information
-    axios.get('http://wp-api.test/wp-json/wp/v2/filter')
+    axios.get('https://awsweb.host/wp-json/wp/v2/filter')
       .then(res=>this.setState({filter: res.data}))
       .catch()
 
