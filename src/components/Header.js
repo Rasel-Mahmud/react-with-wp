@@ -20,6 +20,7 @@ class Header extends Component {
                 <ul>
                   <li onClick={this.refreshPage}><Link to="/">Home</Link></li>
                   <li><Link to="/about">About</Link></li>
+                  <li><Link to="/asif">Asif</Link></li>
                   <li><Link to="/contact">Contact</Link></li>
                 </ul>
               </nav>

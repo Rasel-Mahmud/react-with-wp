@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import Header from "../components/Header";
 
-class Test extends Component {
+class Asif extends Component {
   constructor() {
     super();
     this.state = {
@@ -29,4 +29,4 @@ class Test extends Component {
   }
 }
 
-export default Test;
+export default Asif;
