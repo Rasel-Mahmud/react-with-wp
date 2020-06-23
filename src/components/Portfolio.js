@@ -19,6 +19,7 @@ class Portfolio extends Component {
               <div className="mix col-lg-6 col-md-6 web">
                 <a href="http://google.com" target="_blank" className="portfolio-item set-bg" data-setbg="../assets/images/portfolio/1.jpg">
                   <div className="pi-inner">
+                    <p className="project-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti dolorum ea eum fuga impedit in, laboriosam nihil suscipit veniam voluptatem?</p>
                     <h2>+ See Project</h2>
                   </div>
                 </a>

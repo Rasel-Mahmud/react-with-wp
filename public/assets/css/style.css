@@ -200,7 +200,6 @@ ol {
 .site-btn:hover {
   color: #fff;
 }
-
 /*===  Accordion  ===*/
 .accordion-area .panel {
   margin-bottom: 30px;
@@ -486,6 +485,34 @@ ol {
 .portfolio-item:hover .pi-inner h2 {
   opacity: 1;
   letter-spacing: 0;
+}
+
+.portfolio-item:hover .pi-inner h2 {
+  opacity: 1;
+  letter-spacing: 0;
+}
+
+.project-description {
+  opacity: 0;
+  margin: 50px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #fff;
+  letter-spacing: .5px;
+  font-family: 'Oxygen', sans-serif;
+}
+
+.project-description {
+  opacity: 0;
+  margin: 50px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #fff;
+  letter-spacing: .5px;
+}
+
+.portfolio-item:hover .project-description {
+  opacity: 1;
 }
 
 .portfolio-meta {
