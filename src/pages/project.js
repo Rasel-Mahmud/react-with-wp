@@ -8,65 +8,48 @@ class Project extends Component {
   constructor() {
     super();
     this.state = {
-      data: [],
-      imageData: [],
+      project: [],
       filter : [],
       display: false
     }
   }
   componentDidMount = () => {
     // getting project information
-    axios.get('https://awsweb.host/wp-json/wp/v2/show_project')
-      .then(res=>{
-        res.data.map((id, index)=>{
-          const mediaID = `${res.data[index].featured_media}`;
-          axios.get(`https://awsweb.host/wp-json/wp/v2/media/${mediaID}`)
-            .then(media=>{
-              this.setState({data: res.data, imageData: [...this.state.imageData, media.data], display: true })
-            })
-            .catch(err => console.log((err)))
-        })
-      })
-      .catch(err => console.log(err))
+    axios.get('http://wp-api.test/wp-json/wp/v2/show_project')
+      .then(res=>this.setState({project: res.data, display: true}))
+      .catch()
 
     // getting filter information
-    axios.get('https://awsweb.host/wp-json/wp/v2/filter')
+    axios.get('http://wp-api.test/wp-json/wp/v2/filter')
       .then(res=>this.setState({filter: res.data}))
       .catch()
 
   }
 
-  render() {
-    const data = this.state.data;
-    const imageData = this.state.imageData;
-    const filterData = this.state.filter;
-
-    const filter = filterData.map((name)=>{
+  projectData = ()=>{
+    let projectInfo = this.state.project;
+    return projectInfo.map((data, index)=>{
       return (
-            <li className="control" key={name.id} data-filter={`${name.slug}`}>{name.name}</li>
-        );
+        <div key={`project-container-${index}`} className="mix col-lg-6 col-md-6 web">
+           <a href={data['project-link'] ? data['project-link'] : null} target="_blank" className="portfolio-item set-bg" style={{backgroundImage: "url("+ data['project-image'][0] +")"}}>
+             <div className="pi-inner">
+               <p className="project-description" dangerouslySetInnerHTML={{__html: data.content.rendered}}/>
+               <h2>+ See Project</h2>
+             </div>
+           </a>
+       </div>
+      );
     })
+  }
 
-    const portfolioData = imageData.map((title, index)=>{
-      const returnFilterClass = ()=>{
-        if(data[index].filter[0] === filterData[index].id){
-          return filterData[index].slug;
-        }
-      }
+  filterData = ()=>{
+    let filterInfo = this.state.filter;
+    return filterInfo.map((filter)=>{
+      return <li key={`project-filter${filter.id}`} className="control" data-filter={`.${filter.slug}`}>{filter.name}</li>
+    })
+  }
 
-      return <div key={title.id} className={`mix col-lg-6 col-md-6 ${returnFilterClass()}`}>
-        <a href="http://google.com" target="_blank" className="portfolio-item set-bg"
-           data-setbg="../assets/images/portfolio/8.jpg" style={{
-          backgroundImage: "url(" + `${imageData[index].media_details.sizes.full.source_url}` + ")"
-        }}>
-          <div className="pi-inner">
-            <div className="project-description" dangerouslySetInnerHTML={{__html: data[index].content.rendered}} />
-            <h2>+ See Project</h2>
-          </div>
-        </a>
-      </div>
-    });
-
+  render() {
     if(this.state.display){
       return (
         <div>
@@ -76,25 +59,21 @@ class Project extends Component {
             <div className="container">
               <ul className="portfolio-filter controls">
                 <li className="control" data-filter="all">All</li>
-                {filter}
+                {this.filterData()}
               </ul>
             </div>
             <div className="container">
               <div className="row portfolios-area">
-                {portfolioData}
+                {this.projectData()}
               </div>
             </div>
           </section>
           <Footer />
         </div>
       );
-    }else {
-      return(
-        <div>
-          <div id="preloder">
-            <div className="loader"></div>
-          </div>
-        </div>
+    }else{
+      return (
+        <h1>Loading.....</h1>
       );
     }
   }
