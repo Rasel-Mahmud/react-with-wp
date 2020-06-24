@@ -11,7 +11,7 @@ class TagLine extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://wp-api.test/wp-json/project/v1/header/')
+    axios.get('https://awsweb.host/wp-json/project/v1/header/')
       .then(res=>this.setState({data: res.data, display: true}))
       .catch()
   }
