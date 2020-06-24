@@ -15,12 +15,12 @@ class Project extends Component {
   }
   componentDidMount = () => {
     // getting project information
-    axios.get('http://wp-api.test/wp-json/wp/v2/show_project')
+    axios.get('https://awsweb.host/wp-json/wp/v2/show_project')
       .then(res=>this.setState({project: res.data, display: true}))
       .catch()
 
     // getting filter information
-    axios.get('http://wp-api.test/wp-json/wp/v2/filter')
+    axios.get('https://awsweb.host/wp-json/wp/v2/filter')
       .then(res=>this.setState({filter: res.data}))
       .catch()
 
@@ -73,7 +73,11 @@ class Project extends Component {
       );
     }else{
       return (
-        <h1>Loading.....</h1>
+        <div>
+          <div id="preloder">
+            <div className="loader" />
+          </div>
+        </div>
       );
     }
   }

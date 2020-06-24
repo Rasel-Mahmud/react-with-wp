@@ -2,8 +2,35 @@ import React, {Component} from 'react';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import TagLine from "../components/TagLine";
+import axois from 'axios';
 
 class About extends Component {
+  constructor() {
+    super();
+    this.state = {
+      data : '',
+      display: false
+    }
+  }
+
+  componentDidMount() {
+    axois.get('https://awsweb.host/wp-json/project/v1/about/')
+      .then(res=>{this.setState({data: res.data, display: true})})
+      .catch()
+  }
+
+  aboutMe = ()=>{
+    if(this.state.display){
+      return this.state.data[0].about_me
+    }
+  }
+
+  aboutImage = ()=>{
+    if(this.state.display){
+      return this.state.data[0].about_image
+    }
+  }
+
   render() {
     return (
       <div>
@@ -13,34 +40,13 @@ class About extends Component {
           <div className="container">
             <div className="row">
               <div className="col-lg-6">
-                <p className="my-bio">
-                  Hey, how is it going today? My name is Rasel, I'm a web designer/developer from Bangladesh. From 2010, i am relating with Design & Development, But the last couple of years i am working with WordPress (CMS), it is just awesome
-                  i am a full-time freelancer in a different marketplace. i love to learn new programming language always when i get time to learn & like to watch movies also, though i haven't gotten much time to watch.
-                  Thanks for your time.</p>
+                <p className="my-bio">{this.aboutMe()}</p>
                 <div className="row mt-5">
-                  <div className="col-md-4">
-                    <div className="milestone">
-                      <h2>56<span>Clients</span></h2>
-                    </div>
-                  </div>
-                  <div className="col-md-4">
-                    <div className="milestone">
-                      <h2>112<span>Projects</span></h2>
-                    </div>
-                  </div>
-                  <div className="col-md-4">
-                    <div className="milestone">
-                      <h2>25<span>Collabs</span></h2>
-                    </div>
-                  </div>
                 </div>
-                <figure className="mt-5">
-                  <img src="img/sign.png" alt="" />
-                </figure>
               </div>
               <div className="col-lg-5 offset-lg-1">
                 <figure className="pic-frame">
-                  <img src="../assets/images/up.png" alt="" />
+                  <img src={this.aboutImage()} alt="" />
                 </figure>
               </div>
             </div>
