@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Header from "../components/Header";
 import Footer from "../components/Footer";
 import TagLine from "../components/TagLine";
 import axois from 'axios';
@@ -34,8 +33,6 @@ class About extends Component {
   render() {
     return (
       <div>
-        <Header />
-        <TagLine />
         <section className="page-section">
           <div className="container">
             <div className="row">

@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import Header from "../components/Header";
 import Footer from "../components/Footer";
+import mixitup from 'mixitup';
 import axios from 'axios';
-import TagLine from "../components/TagLine";
 
 class Project extends Component {
   constructor() {
@@ -25,12 +24,16 @@ class Project extends Component {
       .catch()
 
   }
+  componentDidUpdate() {
+    let mixer = mixitup('.portfolio-section');
+    mixer.filter('all')
+  }
 
   projectData = ()=>{
     let projectInfo = this.state.project;
     return projectInfo.map((data, index)=>{
       return (
-        <div key={`project-container-${index}`} className="mix col-lg-6 col-md-6 web">
+        <div key={`project-container-${index}`} className={`mix col-lg-6 col-md-6 ${projectInfo[index]['project-category']}`}>
            <a href={data['project-link'] ? data['project-link'] : null} target="_blank" className="portfolio-item set-bg" style={{backgroundImage: "url("+ data['project-image'][0] +")"}}>
              <div className="pi-inner">
                <p className="project-description" dangerouslySetInnerHTML={{__html: data.content.rendered}}/>
@@ -53,8 +56,6 @@ class Project extends Component {
     if(this.state.display){
       return (
         <div>
-          <Header />
-          <TagLine />
           <section className="portfolio-section">
             <div className="container">
               <ul className="portfolio-filter controls">

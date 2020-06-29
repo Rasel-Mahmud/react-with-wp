@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
-import Header from "../components/Header";
-import TagLine from "../components/TagLine";
 import Footer from "../components/Footer";
 
 class Contact extends Component {
   render() {
     return (
       <div>
-        <Header />
-        <TagLine />
         <section className="page-section">
           <div className="container">
             <div className="row">
